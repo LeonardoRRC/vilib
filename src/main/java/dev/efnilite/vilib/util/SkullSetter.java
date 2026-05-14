@@ -15,18 +15,26 @@ public class SkullSetter {
 
     static {
         try {
-            Class<?> playerProfileClass = Class.forName("com.destroystokyo.paper.profile.PlayerProfile");
+            Class<?> playerProfileClass = Class.forName("io.papermc.paper.profile.PlayerProfile");
             getPlayerProfileMethod = Player.class.getDeclaredMethod("getPlayerProfile");
             hasTexturesMethod = playerProfileClass.getDeclaredMethod("hasTextures");
             setPlayerProfileMethod = SkullMeta.class.getDeclaredMethod("setPlayerProfile", playerProfileClass);
             isPaper = true;
         } catch (Exception ex) {
-            isPaper = false;
+            try {
+                Class<?> playerProfileClass = Class.forName("com.destroystokyo.paper.profile.PlayerProfile");
+                getPlayerProfileMethod = Player.class.getDeclaredMethod("getPlayerProfile");
+                hasTexturesMethod = playerProfileClass.getDeclaredMethod("hasTextures");
+                setPlayerProfileMethod = SkullMeta.class.getDeclaredMethod("setPlayerProfile", playerProfileClass);
+                isPaper = true;
+            } catch (Exception ex2) {
+                isPaper = false;
+            }
         }
     }
 
     public static void setPlayerHead(OfflinePlayer player, SkullMeta meta) {
-        if (!isPaper) { // ew
+        if (!isPaper) {
             meta.setOwningPlayer(player);
             return;
         }

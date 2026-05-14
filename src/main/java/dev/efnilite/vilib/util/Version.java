@@ -12,7 +12,7 @@ import java.util.Arrays;
 public enum Version {
 
     V1_16(16), V1_17(17), V1_18(18), V1_19(19), V1_20(20), V1_20_5(20, 5),
-    V1_21(21), V1_22(22);
+    V1_21(21), V1_21_1(21, 1), V1_21_2(21, 2), V1_21_3(21, 3), V1_21_4(21, 4);
 
     public static Version VERSION;
     public final int major;
@@ -72,16 +72,5 @@ public enum Version {
         VERSION = lowerVersions.get(lowerVersions.size() - 1);
 
         return VERSION;
-    }
-
-    /**
-     * Gets the internal version from the Bukkit package.
-     * Format: "v1_20_R1"
-     *
-     * @return the internal version with format "v1_20_R1"
-     */
-    @Deprecated(forRemoval = true)
-    public static String getInternalVersion() {
-        return Bukkit.getBukkitVersion().split("-")[0];
     }
 }
